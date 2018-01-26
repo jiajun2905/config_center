@@ -37,7 +37,7 @@ public class BeanConfiguration {
 
     @Bean
     public CuratorFramework zookeeperClient() throws Exception {
-        String zookeeperAddress = "";
+        String zookeeperAddress = "127.0.0.1:2181";
         int sessionTimeout = 3000;
         int connectionTimeout = 2000;
 

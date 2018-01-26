@@ -21,7 +21,7 @@ public class ZkConfigServiceImpl implements ConfigService {
     @Override
     public List<MetaConfig> getConfigList(String environment) {
 
-
+//        client.getChildren().
 
         return null;
     }
