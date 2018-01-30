@@ -2,15 +2,14 @@ package com.jiajun.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
- * Created by SUMMERS on 2018/1/27.
+ * Created by SUMMERS on 2018/1/30.
  */
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer {
+public class ClientApplication {
 
     public static void main(String[] args){
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(ClientApplication.class,args);
     }
 }
