@@ -11,8 +11,6 @@ public class NettyMessage {
 
     private Long timestamp;
 
-    private MessageBody messageBody;
-
     public MessageEventEnum getType() {
         return type;
     }
@@ -37,11 +35,4 @@ public class NettyMessage {
         this.timestamp = timestamp;
     }
 
-    public MessageBody getMessageBody() {
-        return messageBody;
-    }
-
-    public void setMessageBody(MessageBody messageBody) {
-        this.messageBody = messageBody;
-    }
 }

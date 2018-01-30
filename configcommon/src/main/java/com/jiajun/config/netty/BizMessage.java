@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by SUMMERS on 2018/1/27.
  */
-public class BizMessageBody extends MessageBody {
+public class BizMessage extends NettyMessage{
 
     private String rootPath;
 
