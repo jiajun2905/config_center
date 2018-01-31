@@ -16,9 +16,12 @@ public class JsonCoderHandler extends ByteToMessageCodec<NettyMessage> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, NettyMessage msg, ByteBuf out) throws Exception {
-        out.writeInt(msg.getType().getCode());
+
 
         String json = JSON.toJSONString(msg);
+        int value = json.getBytes("utf-8").length + 4;
+        out.writeInt(value);
+        out.writeInt(msg.getType().getCode());
 
         out.writeBytes(json.getBytes("utf-8"));
 
@@ -36,8 +39,11 @@ public class JsonCoderHandler extends ByteToMessageCodec<NettyMessage> {
             ReferenceCountUtil.release(in);
             return;
         }
+
         String json = in.toString(Charset.forName("utf-8"));
         Object o = JSON.parseObject(json, messageEventEnum.getMessageClass());
         out.add(o);
+        in.clear();// 待考究，out待考究
+//        ReferenceCountUtil.release(in);
     }
 }

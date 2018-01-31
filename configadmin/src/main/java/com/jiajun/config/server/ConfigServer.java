@@ -1,6 +1,8 @@
 package com.jiajun.config.server;
 
+import com.jiajun.config.netty.BizMessage;
 import com.jiajun.config.netty.JsonCoderHandler;
+import com.jiajun.config.netty.MessageEventEnum;
 import com.jiajun.config.server.handler.ReaderHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -33,7 +35,7 @@ public class ConfigServer {
                     @Override
                     protected void initChannel(SocketChannel channel) throws Exception {
                         ChannelPipeline pipeline = channel.pipeline();
-                        pipeline.addLast(new LengthFieldBasedFrameDecoder(100000,0,4))
+                        pipeline.addLast(new LengthFieldBasedFrameDecoder(100000,0,4,0,4))
                                 .addLast(new JsonCoderHandler())
                                 .addLast(new ReaderHandler());
                     }
@@ -41,5 +43,13 @@ public class ConfigServer {
 
         bootstrap.bind(1226).sync();
 
+        for(; ;){
+            BizMessage bizMessage = new BizMessage();
+            bizMessage.setType(MessageEventEnum.BIZ);
+            bizMessage.setTimestamp(System.currentTimeMillis());
+            ChannelManager.writeToAll(bizMessage);
+
+            Thread.sleep(1000L);
+        }
     }
 }

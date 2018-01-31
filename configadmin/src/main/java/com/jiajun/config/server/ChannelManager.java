@@ -36,4 +36,11 @@ public class ChannelManager {
         }
         channel.writeAndFlush(bizMessage);
     }
+
+    public static void writeToAll(BizMessage bizMessage){
+        for(Map.Entry<String,Channel> entry : channelMap.entrySet()){
+            Channel channel = entry.getValue();
+            channel.writeAndFlush(bizMessage);
+        }
+    }
 }
